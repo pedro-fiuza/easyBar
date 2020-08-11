@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useRouteMatch, Link } from 'react-router-dom';
+import React /* , { useState, useEffect } */ from 'react';
+import { /* useRouteMatch, */ Link } from 'react-router-dom';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import logo from '../../assets/img/easy.png';
 import { Header, RepositoryInfo, Orders } from './styles';
@@ -9,9 +9,9 @@ interface RepositoryParams {
 }
 
 const Repository: React.FC = () => {
-  const [newItens, setNewItens] = useState('');
+  // const [newItens, setNewItens] = useState('');
 
-  const { params } = useRouteMatch();
+  // const { params } = useRouteMatch();
 
   return (
     <>
