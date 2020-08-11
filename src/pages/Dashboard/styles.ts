@@ -8,11 +8,11 @@ interface FormProps {
 
 export const Title = styled.h1`
   font-size: 48px;
-  color: #3a3a3a;
+  color: #023891;
   max-width: 450px;
   line-height: 56px;
 
-  margin-top: 80px;
+  margin-top: 20px;
 `;
 
 export const Form = styled.form<FormProps>`

@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import React, { useState, FormEvent, useEffect } from 'react';
 import { FiChevronRight } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { Title, Form, Repositories, Error } from './styles';
 import logo from '../../assets/img/easy.png';
@@ -15,12 +16,10 @@ interface Repository {
 }
 
 const Dashboard: React.FC = () => {
-  const [newRepo, setNewRepo] = useState('');
+  const [newCommand, setNewCommand] = useState('');
   const [inputError, setInputError] = useState('');
   const [repositories, setRepositories] = useState<Repository[]>(() => {
-    const storagedRepositories = localStorage.getItem(
-      '@GithubExplorer:repositories',
-    );
+    const storagedRepositories = localStorage.getItem('@Easybar:repositories');
 
     if (storagedRepositories) {
       return JSON.parse(storagedRepositories);
@@ -29,32 +28,29 @@ const Dashboard: React.FC = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem(
-      '@GithubExplorer:repositories',
-      JSON.stringify(repositories),
-    );
+    localStorage.setItem('@Easybar:repositories', JSON.stringify(repositories));
   }, [repositories]);
 
-  async function handleAddRepository(
+  async function handleAddCommand(
     event: FormEvent<HTMLFormElement>,
   ): Promise<void> {
     event.preventDefault();
 
-    if (!newRepo) {
-      setInputError('Digite o autor/nome do repositorio');
+    if (!newCommand) {
+      setInputError('Digite o seu CPF para consultar a sua comanda!');
       return;
     }
 
     try {
-      const response = await api.get<Repository>(`repos/${newRepo}`);
+      const response = await api.get<Repository>(`repos/${newCommand}`);
 
       const repository = response.data;
 
       setRepositories([...repositories, repository]);
-      setNewRepo('');
+      setNewCommand('');
       setInputError('');
     } catch (err) {
-      setInputError('Erro na busca por esse repositorio');
+      setInputError('Erro na busca de sua comanda.');
     }
   }
 
@@ -63,10 +59,10 @@ const Dashboard: React.FC = () => {
       <img src={logo} width="80px" height="70px" alt="easyBar" />
       <Title>Explore os pedidos de sua comanda</Title>
 
-      <Form hasError={!!inputError} onSubmit={handleAddRepository}>
+      <Form hasError={!!inputError} onSubmit={handleAddCommand}>
         <input
-          value={newRepo}
-          onChange={e => setNewRepo(e.target.value)}
+          value={newCommand}
+          onChange={e => setNewCommand(e.target.value)}
           placeholder="Digite o item pedido"
         />
         <button type="submit">Pesquisar</button>
@@ -76,7 +72,10 @@ const Dashboard: React.FC = () => {
 
       <Repositories>
         {repositories.map(repository => (
-          <a key={repository.full_name} href="teste">
+          <Link
+            key={repository.full_name}
+            to={`/repository/${repository.full_name}`}
+          >
             <img src={logo} alt={'aguardando dados api'} />
             <div>
               <strong>{'Nome do item'}</strong>
@@ -84,7 +83,7 @@ const Dashboard: React.FC = () => {
             </div>
 
             <FiChevronRight size={20} />
-          </a>
+          </Link>
         ))}
       </Repositories>
     </>
