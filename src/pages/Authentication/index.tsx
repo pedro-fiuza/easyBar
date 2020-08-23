@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../assets/img/easy.png';
 
@@ -16,7 +17,9 @@ const Authentication: React.FC = () => {
 
             <input placeholder="CPF" />
 
-            <button type="submit">Entrar</button>
+            <Link to="/dashboard">
+              <button type="submit">Entrar</button>
+            </Link>
           </form>
         </Content>
       </Container>
