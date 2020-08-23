@@ -72,10 +72,7 @@ const Dashboard: React.FC = () => {
 
       <Repositories>
         {repositories.map(repository => (
-          <Link
-            key={repository.full_name}
-            to={`/repository/${repository.full_name}`}
-          >
+          <Link key={repository.full_name} to={`/authentication`}>
             <img src={logo} alt={'aguardando dados api'} />
             <div>
               <strong>{'Nome do item'}</strong>
