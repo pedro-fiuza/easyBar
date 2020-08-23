@@ -7,9 +7,9 @@ import Authentication from '../pages/Authentication';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route path="/" exact component={Dashboard} />
+    <Route path="/" exact component={Authentication} />
     <Route path="/repository/:id" component={Repository} />
-    <Route path="/authentication" component={Authentication} />
+    <Route path="/dashboard" component={Authentication} />
   </Switch>
 );
 
