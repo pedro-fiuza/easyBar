@@ -43,7 +43,7 @@ const Repository: React.FC = () => {
       </RepositoryInfo>
 
       <Orders>
-        <Link to={`/repository`}>
+        <Link to={`#`}>
           <img src={logo} alt={'aguardando dados api'} />
           <div>
             <strong>{'Nome do item'}</strong>
